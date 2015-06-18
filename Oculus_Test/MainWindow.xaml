@@ -19,8 +19,8 @@
     <Grid Grid.Column="0" Grid.Row="0">
       <Grid.RowDefinitions>
         <RowDefinition Height="70"/>
-        <RowDefinition Height="30"/>
-        <RowDefinition Height="30"/>
+        <RowDefinition Height="35"/>
+        <RowDefinition Height="35"/>
       </Grid.RowDefinitions>
       <StackPanel Height="60" Width="100" Grid.Row="0">
         <TextBlock Margin="0,5,0,5" HorizontalAlignment="center" Text="Loaded Dll:"/>
@@ -30,12 +30,12 @@
       </StackPanel>
       <Button Name="LoadOldDll" Click="LoadOldDll_OnClick" Grid.Row="1" Margin="0,5,0,5">
         <TextBlock>
-                    Load <Bold>Old</Bold> Dll
+                    Load <Bold><Underline>O</Underline>ld</Bold> Dll
         </TextBlock>
       </Button>
       <Button Name="LoadNewDll" Click="LoadNewDll_OnClick" Grid.Row="2" Margin="0,5,0,5">
         <TextBlock>
-                Load <Bold>New</Bold> Dll
+                Load <Bold><Underline>N</Underline>ew</Bold> Dll
         </TextBlock>
       </Button>
     </Grid>
@@ -46,7 +46,9 @@
         <RowDefinition Height="30"/>
       </Grid.RowDefinitions>
       <Button Click="ButtonBase_OnClick">
-        Close
+        <TextBlock>
+        <Underline>C</Underline>lose
+        </TextBlock>
       </Button>
     </Grid>
     <Grid Grid.Column="1" Grid.Row="1">
@@ -85,17 +87,17 @@
       </Grid.ColumnDefinitions>
       <Button Name="EyeHeight" Grid.Column="0" Margin="10,0,10,0" Click="EyeHeight_OnClick">
         <TextBlock>
-                    Oculus per eye render <Bold>height</Bold>
+                    Oculus per eye render <Bold><Underline>h</Underline>eight</Bold>
         </TextBlock>
       </Button>
       <Button Name="EyeWidth" Grid.Column="1" Margin="10,0,10,0" Click="EyeWidth_OnClick">
         <TextBlock>
-                    Oculus per eye render <Bold>width</Bold>
+                    Oculus per eye render <Bold><Underline>w</Underline>idth</Bold>
         </TextBlock>
       </Button>
       <Button Name="Tracking" Grid.Column="2" Margin="10,0,10,0" Click="Tracking_OnClick">
         <TextBlock>
-                    Get Oculus' tracking information
+                    Get Oculus' <Underline>t</Underline>racking information
         </TextBlock>
       </Button>
     </Grid>
@@ -135,17 +137,17 @@
       </Grid.ColumnDefinitions>
       <Button Name="Init" Grid.Column="0" Margin="10,0,10,0" Click="Init_OnClick">
         <TextBlock>
-                    Init the Oculus
+                    <Underline>I</Underline>nit the Oculus
         </TextBlock>
       </Button>
       <Button Name="Proceed" Grid.Column="1" Margin="10,0,10,0" Click="Proceed_OnClick">
         <TextBlock>
-                    Proceed to the Oculus rendering
+                    <Underline>P</Underline>roceed to the Oculus rendering
         </TextBlock>
       </Button>
       <Button Name="Release" Grid.Column="2" Margin="10,0,10,0" Click="Release_OnClick">
         <TextBlock>
-                    Release the Oculus
+                    <Underline>R</Underline>elease the Oculus
         </TextBlock>
       </Button>
     </Grid>

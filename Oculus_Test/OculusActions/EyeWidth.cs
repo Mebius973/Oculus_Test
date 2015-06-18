@@ -2,6 +2,8 @@
 {
     public class EyeWidth : OculusAction
     {
-         
+        public EyeWidth(string dllVersion)
+        {
+        }
     }
 }

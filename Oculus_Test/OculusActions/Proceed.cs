@@ -2,6 +2,8 @@
 {
     public class Proceed : OculusAction
     {
-         
+        public Proceed(string dllVersion)
+        {
+        }
     }
 }

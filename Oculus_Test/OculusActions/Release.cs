@@ -2,6 +2,8 @@
 {
     public class Release : OculusAction
     {
-         
+        public Release(string dllVersion)
+        {
+        }
     }
 }

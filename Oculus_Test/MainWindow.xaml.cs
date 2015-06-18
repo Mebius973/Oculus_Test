@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
+using Oculus_Test.Malcolms;
 using Oculus_Test.OculusActions;
 
 namespace Oculus_Test
@@ -40,51 +41,51 @@ namespace Oculus_Test
 
     private void EyeHeight_OnClick(object sender, RoutedEventArgs e)
     {
-      var eyeHeight = new EyeHeight(_dllVersion);
-      ShowEyeHeight.Inlines.Add(new Run("\n       "));
-      ShowEyeHeight.Inlines.Add(new Run(eyeHeight.Show()));
+      var display = new MalcolmEyeHeight(_dllVersion, ShowEyeHeight);
+        display.Update();
     }
 
     private void EyeWidth_OnClick(object sender, RoutedEventArgs e)
     {
       var eyeWidth = new EyeWidth(_dllVersion);
-      ShowEyeHeight.Inlines.Add(new Run("\n       "));
-      ShowEyeHeight.Inlines.Add(new Run(eyeWidth.Show()));
+      ShowEyeWidth.Inlines.Add(new Run("\n       "));
+      ShowEyeWidth.Inlines.Add(new Run(eyeWidth.Show()));
     }
 
     private void Tracking_OnClick(object sender, RoutedEventArgs e)
     {
-      var tracking = new Tracking(_dllVersion);
-      ShowEyeHeight.Inlines.Add(new Run("\n       "));
-      ShowEyeHeight.Inlines.Add(new Run(tracking.Show()));
+      var display = new MalcolmTracking(_dllVersion, ShowTracking);
+      display.Update();
     }
 
     private void Init_OnClick(object sender, RoutedEventArgs e)
     {
       var init = new Init(_dllVersion);
-      ShowEyeHeight.Inlines.Add(new Run("\n       "));
-      ShowEyeHeight.Inlines.Add(new Run(init.Show()));
+      ShowInitStatus.Inlines.Add(new Run("\n       "));
+      ShowInitStatus.Inlines.Add(new Run(init.Show()));
     }
 
     private void Proceed_OnClick(object sender, RoutedEventArgs e)
     {
       var proceed = new Proceed(_dllVersion);
-      ShowEyeHeight.Inlines.Add(new Run("\n       "));
-      ShowEyeHeight.Inlines.Add(new Run(proceed.Show()));
+      ShowProceedStatus.Inlines.Add(new Run("\n       "));
+      ShowProceedStatus.Inlines.Add(new Run(proceed.Show()));
     }
 
     private void Release_OnClick(object sender, RoutedEventArgs e)
     {
       var release = new Release(_dllVersion);
-      ShowEyeHeight.Inlines.Add(new Run("\n       "));
-      ShowEyeHeight.Inlines.Add(new Run(release.Show()));
+      ShowReleaseStatus.Inlines.Add(new Run("\n       "));
+      ShowReleaseStatus.Inlines.Add(new Run(release.Show()));
     }
 
     private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
     {
-      if (e.Key == Key.Escape)
+      switch (e.Key)
       {
-        Application.Current.Shutdown();
+        case Key.Escape:
+          Application.Current.Shutdown();
+          break;
       }
     }
 

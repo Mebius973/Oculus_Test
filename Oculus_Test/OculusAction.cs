@@ -45,6 +45,7 @@ namespace Oculus_Test
 
     protected OculusAction()
     {
+      throw new ArgumentException();
     }
   }
 }

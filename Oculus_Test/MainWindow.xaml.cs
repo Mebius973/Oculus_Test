@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using Oculus_Test.Malcolms;
@@ -11,31 +11,28 @@ namespace Oculus_Test
   /// </summary>
   public partial class MainWindow : Window
   {
+    private string _dllVersion;
+    private Keyboard _keyboard;
+
     public MainWindow()
     {
       InitializeComponent();
       _dllVersion = "None";
+      _keyboard = new Keyboard();
     }
-
-    private string _dllVersion;
 
     private void LoadOldDll_OnClick(object sender, RoutedEventArgs e)
     {
       _dllVersion = "Old";
-      var oculusAction = new OculusAction(_dllVersion);
-      if (oculusAction.IsDllLoad())
-      {
-        LoadedDll.Text = _dllVersion;
-      }
+      var display = new MalcolmDllVersion(_dllVersion, LoadedDll);
+      display.Update();
     }
 
     private void LoadNewDll_OnClick(object sender, RoutedEventArgs e)
     {
       _dllVersion = "New";
-      var oculusAction = new OculusAction(_dllVersion);
-      if (oculusAction.IsDllLoad())
-      {
-        LoadedDll.Text = _dllVersion;
+      var display = new MalcolmDllVersion(_dllVersion, LoadedDll);
+      display.Update();
       }
     }
 
@@ -47,9 +44,8 @@ namespace Oculus_Test
 
     private void EyeWidth_OnClick(object sender, RoutedEventArgs e)
     {
-      var eyeWidth = new EyeWidth(_dllVersion);
-      ShowEyeWidth.Inlines.Add(new Run("\n       "));
-      ShowEyeWidth.Inlines.Add(new Run(eyeWidth.Show()));
+      var display = new MalcolmEyeWidth(_dllVersion, ShowEyeWidth);
+      display.Update();
     }
 
     private void Tracking_OnClick(object sender, RoutedEventArgs e)
@@ -60,33 +56,25 @@ namespace Oculus_Test
 
     private void Init_OnClick(object sender, RoutedEventArgs e)
     {
-      var init = new Init(_dllVersion);
-      ShowInitStatus.Inlines.Add(new Run("\n       "));
-      ShowInitStatus.Inlines.Add(new Run(init.Show()));
+      var display = new MalcolmInit(_dllVersion, ShowInitStatus);
+      display.Update();
     }
 
     private void Proceed_OnClick(object sender, RoutedEventArgs e)
     {
-      var proceed = new Proceed(_dllVersion);
-      ShowProceedStatus.Inlines.Add(new Run("\n       "));
-      ShowProceedStatus.Inlines.Add(new Run(proceed.Show()));
+      var display = new MalcolmProceed(_dllVersion, ShowProceedStatus);
+      display.Update();
     }
 
     private void Release_OnClick(object sender, RoutedEventArgs e)
     {
-      var release = new Release(_dllVersion);
-      ShowReleaseStatus.Inlines.Add(new Run("\n       "));
-      ShowReleaseStatus.Inlines.Add(new Run(release.Show()));
+      var display = new MalcolmRelease(_dllVersion, ShowReleaseStatus);
+      display.Update();
     }
 
     private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
     {
-      switch (e.Key)
-      {
-        case Key.Escape:
-          Application.Current.Shutdown();
-          break;
-      }
+      _keyboard.ActionFor(e.Key);
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

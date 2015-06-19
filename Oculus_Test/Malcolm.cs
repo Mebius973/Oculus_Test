@@ -21,7 +21,8 @@ namespace Oculus_Test
 
     protected Malcolm()
     {
-      throw new ArgumentException();
+      Console.WriteLine("On est dans le constructeur de merde");
+      //throw new ArgumentException();
     }
   }
 }

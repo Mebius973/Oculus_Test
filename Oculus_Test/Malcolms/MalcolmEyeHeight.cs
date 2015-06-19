@@ -19,10 +19,5 @@ namespace Oculus_Test.Malcolms
       Textblock.Inlines.Add(new Run("\n       "));
       Textblock.Inlines.Add(new Run(_eyeHeight.Show()));
     }
-
-    private MalcolmEyeHeight()
-    {
-      Console.WriteLine("On est pas dans le bon constructeur");
-    }
   }
 }

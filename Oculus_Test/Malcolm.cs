@@ -5,10 +5,8 @@ namespace Oculus_Test
 {
   public class Malcolm
   {
-    protected readonly TextBlock TextBlock;
-    public Malcolm(string dllVersion, TextBlock field)
+    public Malcolm(string dllVersion)
     {
-      TextBlock = field;
     }
 
     public void Update()

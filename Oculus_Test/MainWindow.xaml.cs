@@ -24,52 +24,44 @@ namespace Oculus_Test
     private void LoadOldDll_OnClick(object sender, RoutedEventArgs e)
     {
       _dllVersion = "Old";
-      var display = new MalcolmDllVersion(_dllVersion, LoadedDll);
-      display.Update();
+      MalcolmPerformer("DllVersion", _dllVersion, LoadedDll);
     }
 
     private void LoadNewDll_OnClick(object sender, RoutedEventArgs e)
     {
       _dllVersion = "New";
-      var display = new MalcolmDllVersion(_dllVersion, LoadedDll);
-      display.Update();
+      MalcolmPerformer("DllVersion", _dllVersion, LoadedDll);
       }
     }
 
     private void EyeHeight_OnClick(object sender, RoutedEventArgs e)
     {
-      var display = new MalcolmEyeHeight(_dllVersion, ShowEyeHeight);
-        display.Update();
+      MalcolmPerformer("EyeHeight", _dllVersion, ShowEyeHeight);
     }
 
     private void EyeWidth_OnClick(object sender, RoutedEventArgs e)
     {
-      var display = new MalcolmEyeWidth(_dllVersion, ShowEyeWidth);
-      display.Update();
+      MalcolmPerformer("EyeWidth", _dllVersion, ShowEyeWidth);
     }
 
     private void Tracking_OnClick(object sender, RoutedEventArgs e)
     {
-      var display = new MalcolmTracking(_dllVersion, ShowTracking);
-      display.Update();
+      MalcolmPerformer("Tracking", _dllVersion, ShowTracking);
     }
 
     private void Init_OnClick(object sender, RoutedEventArgs e)
     {
-      var display = new MalcolmInit(_dllVersion, ShowInitStatus);
-      display.Update();
+      MalcolmPerformer("Init", _dllVersion, ShowInitStatus);
     }
 
     private void Proceed_OnClick(object sender, RoutedEventArgs e)
     {
-      var display = new MalcolmProceed(_dllVersion, ShowProceedStatus);
-      display.Update();
+      MalcolmPerformer("Proceed", _dllVersion, ShowProceedStatus);
     }
 
     private void Release_OnClick(object sender, RoutedEventArgs e)
     {
-      var display = new MalcolmRelease(_dllVersion, ShowReleaseStatus);
-      display.Update();
+      MalcolmPerformer("Release", _dllVersion, ShowReleaseStatus);
     }
 
     private void UIElement_OnKeyDown(object sender, KeyEventArgs e)

@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using Oculus_Test.Malcolms;

@@ -1,3 +1,7 @@
+using System.Windows.Controls;
+using System.Windows.Documents;
+using Oculus_Test.OculusActions;
+
 namespace Oculus_Test.Malcolms
 {
   public class MalcolmInit : Malcolm
@@ -9,10 +13,10 @@ namespace Oculus_Test.Malcolms
       _init = new Init(dllVersion);
     }
 
-    public void Update()
+    public new void Update()
     {
-      TextBlock.Inlines.Add(new Run("\n       "));
-      TextBlock.Inlines.Add(new Run(_init.Show()));
+      Textblock.Inlines.Add(new Run("\n       "));
+      Textblock.Inlines.Add(new Run(_init.Show()));
     }
   }
 }

@@ -1,18 +1,21 @@
+using System.Windows.Controls;
+
 namespace Oculus_Test.Malcolms
 {
   public class MalcolmDllVersion : Malcolm
   {
     private readonly OculusAction _oculusAction;
-    public MalcolmDllVersion(string dllVersion)
+
+    public MalcolmDllVersion(string dllVersion, TextBlock field)
     {
-      _oculusAction = new OculusAction(_dllVersion);
+      _oculusAction = new OculusAction(DllVersion);
     }
 
-    public void Update()
+    public new void Update()
     {
       if (_oculusAction.IsDllLoad())
       {
-        LoadedDll.Text = _dllVersion;
+        Textblock.Text = DllVersion;
       }
     }
   }

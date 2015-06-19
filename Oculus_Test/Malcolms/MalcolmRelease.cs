@@ -1,3 +1,7 @@
+using System.Windows.Controls;
+using System.Windows.Documents;
+using Oculus_Test.OculusActions;
+
 namespace Oculus_Test.Malcolms
 {
   public class MalcolmRelease : Malcolm
@@ -8,11 +12,11 @@ namespace Oculus_Test.Malcolms
       _release = new Release(dllVersion);
     }
 
-    public void Update()
+    public new void Update()
     {
       // This technique of display will be a problem when we ask the size several time in a row
-      TextBlock.Inlines.Add(new Run("\n       "));
-      TextBlock.Inlines.Add(new Run(_release.Show()));
+      Textblock.Inlines.Add(new Run("\n       "));
+      Textblock.Inlines.Add(new Run(_release.Show()));
     }
   }
 }

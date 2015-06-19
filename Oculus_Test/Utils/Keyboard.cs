@@ -1,8 +1,11 @@
+using System.Windows;
+using System.Windows.Input;
+
 namespace Oculus_Test.Utils
 {
   public static class Keyboard
   {
-    public void ActionFor(Key key)
+    public static void ActionFor(Key key)
     {
       switch (key)
       {

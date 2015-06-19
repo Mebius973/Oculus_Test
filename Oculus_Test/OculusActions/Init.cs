@@ -16,7 +16,7 @@ namespace Oculus_Test.OculusActions
       InitializeOculus();
     }
 
-    public string Show()
+    public new string Show()
     {
       return _status;
     }

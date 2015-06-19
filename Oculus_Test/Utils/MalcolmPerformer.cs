@@ -1,14 +1,25 @@
+using System;
+using System.Dynamic;
+using System.Reflection;
+using System.Windows.Controls;
+using Oculus_Test.Malcolms;
+
 namespace Oculus_Test.Utils
 {
   public static class MalcolmPerformer
   {
-    public void For(string action, string dllVersion, TextBlock field)
+    public static void For(string action, string dllVersion, TextBlock field)
     {
       // Voir comment faire ça bien
-      var malcolmFullName = "Malcolm".action;
-      var malcolmClassName = malcolmFullName.ToClassName;
-      var malcolm = new malcolmClassName(dllVersion, field);
-      malcolm.Update();
+      object[] args = {dllVersion, field};
+      var malcolmFullName = "Oculus_Test.Malcolms.Malcolm" + action;
+      var malcolmClassName = Type.GetType(malcolmFullName);
+      if (malcolmClassName != null)
+      {
+        var malcolm = Activator.CreateInstance(malcolmClassName, args);
+      }
+      //var malcolm = malcolmClassName.InvokeMember("MalcolmEyeHeight", BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static, null, null, args);
+      //malcolm.Update();
     }
   }
 }

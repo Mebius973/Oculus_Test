@@ -7,7 +7,9 @@ namespace Oculus_Test.Malcolms
   public class MalcolmEyeWidth : Malcolm
   {
     private readonly EyeWidth _eyeWidth;
+
     public MalcolmEyeWidth(string dllVersion, TextBlock field)
+      : base(dllVersion, field)
     {
       _eyeWidth = new EyeWidth(dllVersion);
     }

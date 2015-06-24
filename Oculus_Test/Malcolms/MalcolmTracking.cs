@@ -7,7 +7,9 @@ namespace Oculus_Test.Malcolms
   public class MalcolmTracking : Malcolm
   {
     private readonly Tracking _tracking;
+
     public MalcolmTracking(string dllVersion, TextBlock field)
+      : base(dllVersion, field)
     {
       _tracking = new Tracking(dllVersion);
     }

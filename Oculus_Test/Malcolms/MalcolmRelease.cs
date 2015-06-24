@@ -7,7 +7,9 @@ namespace Oculus_Test.Malcolms
   public class MalcolmRelease : Malcolm
   {
     private readonly Release _release;
+
     public MalcolmRelease(string dllVersion, TextBlock field)
+      : base(dllVersion, field)
     {
       _release = new Release(dllVersion);
     }

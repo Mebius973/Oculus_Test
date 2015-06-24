@@ -7,7 +7,9 @@ namespace Oculus_Test.Malcolms
   public class MalcolmProceed : Malcolm
   {
     private readonly Proceed _proceed;
+
     public MalcolmProceed(string dllVersion, TextBlock field)
+      : base(dllVersion, field)
     {
       _proceed = new Proceed(dllVersion);
     }

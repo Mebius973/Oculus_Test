@@ -10,6 +10,7 @@ namespace Oculus_Test.OculusActions
     private int _height;
 
     public EyeHeight(string dllVersion)
+      : base(dllVersion)
     {
       Ask();
     }

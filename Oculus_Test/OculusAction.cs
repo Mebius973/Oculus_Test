@@ -10,6 +10,7 @@ namespace Oculus_Test
 
     public OculusAction(string dllVersion)
     {
+      var test = Dll.FreeLibrary(HGetProcIddll);
       switch (dllVersion)
       {
         case "New":

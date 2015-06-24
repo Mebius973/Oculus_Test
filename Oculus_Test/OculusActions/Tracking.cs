@@ -2,7 +2,8 @@
 {
     public class Tracking : OculusAction
     {
-        public Tracking(string dllVersion)
+      public Tracking(string dllVersion)
+        : base(dllVersion)
         {
         }
     }

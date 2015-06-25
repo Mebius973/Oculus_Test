@@ -29,7 +29,7 @@ namespace Oculus_Test.OculusActions
       var init = Dll.GetProcAddress(HGetProcIddll, "birth");
       if (init != IntPtr.Zero) return init;
       Console.WriteLine(Resources.Init_RetrieveDllInitFunction_Error__init_function_not_found_in_dll);
-      _status = "Oculus' init function not found in dll,, we drifted into the rift!";
+      _status = "Oculus' init function not found in dll, we drifted into the rift!";
       throw new NullReferenceException();
     }
 

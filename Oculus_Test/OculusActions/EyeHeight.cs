@@ -23,7 +23,7 @@ namespace Oculus_Test.OculusActions
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate int GetImageHeight();
 
-    private IntPtr RetrieveDllGetImageHeightFunction()
+    private static IntPtr RetrieveDllGetImageHeightFunction()
     {
       var eyeHeight = Dll.GetProcAddress(HGetProcIddll, "getImageHeight");
       if (eyeHeight != IntPtr.Zero) return eyeHeight;
@@ -34,8 +34,8 @@ namespace Oculus_Test.OculusActions
     private void Ask()
     {
       var eyeHeight = RetrieveDllGetImageHeightFunction();
-      var getImageHeight = (GetImageHeight)Marshal.GetDelegateForFunctionPointer(eyeHeight, typeof(GetImageHeight));
-      _height = getImageHeight();
+      var retrieveImageHeight = (GetImageHeight)Marshal.GetDelegateForFunctionPointer(eyeHeight, typeof(GetImageHeight));
+      _height = retrieveImageHeight();
     }
   }
 }

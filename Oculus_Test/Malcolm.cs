@@ -5,10 +5,10 @@ namespace Oculus_Test
 {
   public class Malcolm
   {
-    protected string DllVersion;
-    protected TextBlock Textblock;
+    protected readonly string DllVersion;
+    protected readonly TextBlock Textblock;
 
-    public Malcolm(string dllVersion, TextBlock field)
+    protected Malcolm(string dllVersion, TextBlock field)
     {
       DllVersion = dllVersion;
       Textblock = field;
@@ -21,8 +21,7 @@ namespace Oculus_Test
 
     protected Malcolm()
     {
-      Console.WriteLine("On est dans le constructeur de merde");
-      //throw new ArgumentException();
+      throw new ArgumentException();
     }
   }
 }

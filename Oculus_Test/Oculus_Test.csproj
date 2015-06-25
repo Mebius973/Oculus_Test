@@ -55,7 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Utils\Keyboard.cs" />
     <Compile Include="Utils\MalcolmPerformer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +116,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Oculus.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\pirate-ship-left-eye.jpg" />
+    <Resource Include="assets\pirate-ship-right-eye.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

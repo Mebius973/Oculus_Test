@@ -1,16 +1,19 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Oculus_Test.Utils;
-using Keyboard = Oculus_Test.Utils.Keyboard;
 
 namespace Oculus_Test
 {
   /// <summary>
   ///     Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class MainWindow
   {
     private string _dllVersion;
+    private static TextBlock _field;
+    private string _action;
 
     public MainWindow()
     {
@@ -20,49 +23,99 @@ namespace Oculus_Test
 
     private void LoadOldDll_OnClick(object sender, RoutedEventArgs e)
     {
+      Console.WriteLine(sender);
+      Console.WriteLine(e);
       _dllVersion = "Old";
-      MalcolmPerformer.For("DllVersion", _dllVersion, LoadedDll);
+      _field = LoadedDll;
+      _action = "DllVersion";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void LoadNewDll_OnClick(object sender, RoutedEventArgs e)
     {
       _dllVersion = "New";
-      MalcolmPerformer.For("DllVersion", _dllVersion, LoadedDll);
+      _field = LoadedDll;
+      _action = "DllVersion";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void EyeHeight_OnClick(object sender, RoutedEventArgs e)
     {
-      MalcolmPerformer.For("EyeHeight", _dllVersion, ShowEyeHeight);
+      _field = ShowEyeHeight;
+      _action = "EyeHeight";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void EyeWidth_OnClick(object sender, RoutedEventArgs e)
     {
-      MalcolmPerformer.For("EyeWidth", _dllVersion, ShowEyeWidth);
+      _field = ShowEyeWidth;
+      _action = "EyeWidth";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void Tracking_OnClick(object sender, RoutedEventArgs e)
     {
-      MalcolmPerformer.For("Tracking", _dllVersion, ShowTracking);
+      _field = ShowTracking;
+      _action = "Tracking";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void Init_OnClick(object sender, RoutedEventArgs e)
     {
-      MalcolmPerformer.For("Init", _dllVersion, ShowInitStatus);
+      _field = ShowInitStatus;
+      _action = "Init";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void Proceed_OnClick(object sender, RoutedEventArgs e)
     {
-      MalcolmPerformer.For("Proceed", _dllVersion, ShowProceedStatus);
+      _field = ShowProceedStatus;
+      _action = "Proceed";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void Release_OnClick(object sender, RoutedEventArgs e)
     {
-      MalcolmPerformer.For("Release", _dllVersion, ShowReleaseStatus);
+      _field = ShowReleaseStatus;
+      _action = "Release";
+      MalcolmPerformer.For(_action, _dllVersion, _field);
     }
 
     private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
     {
-      Keyboard.ActionFor(e.Key);
+      switch (e.Key)
+      {
+        case Key.Escape:
+          Application.Current.Shutdown();
+          break;
+        case Key.C:
+          Application.Current.Shutdown();
+          break;
+        case Key.O:
+          LoadOldDll_OnClick(null, null);
+          break;
+        case Key.N:
+          LoadNewDll_OnClick(null, null);
+          break;
+        case Key.H:
+          EyeHeight_OnClick(null, null);
+          break;
+        case Key.W:
+          EyeWidth_OnClick(null, null);
+          break;
+        case Key.T:
+          Tracking_OnClick(null, null);
+          break;
+        case Key.I:
+          Init_OnClick(null, null);
+          break;
+        case Key.P:
+          Proceed_OnClick(null, null);
+          break;
+        case Key.R:
+          Release_OnClick(null, null);
+          break;
+      }
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

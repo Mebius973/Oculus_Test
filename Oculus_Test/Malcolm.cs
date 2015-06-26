@@ -18,10 +18,5 @@ namespace Oculus_Test
     {
       throw new NotImplementedException();
     }
-
-    protected Malcolm()
-    {
-      throw new ArgumentException();
-    }
   }
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Oculus_Test.Properties;
 using Oculus_Test.Utils;
@@ -22,7 +25,7 @@ namespace Oculus_Test.OculusActions
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate int Process();
+    private delegate int Process(char[] data);
 
     private IntPtr RetrieveDllProcessFunction()
     {
@@ -35,9 +38,14 @@ namespace Oculus_Test.OculusActions
 
     private void ProcessOculus()
     {
+      var bmp = Bitmap.FromFile(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-left-eye.bmp");
+      var converter = new ImageConverter();
+      var dataBytes = (byte[]) converter.ConvertTo(bmp, typeof (byte[]));
+      var data = System.Text.Encoding.UTF8.GetString(dataBytes).ToCharArray();
       var process = RetrieveDllProcessFunction();
       var processOculus = (Process)Marshal.GetDelegateForFunctionPointer(process, typeof(Process));
-      processOculus();
+
+      processOculus(data);
       _status = "Oculus has been proceed";
     }
   }

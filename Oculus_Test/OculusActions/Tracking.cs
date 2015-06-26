@@ -21,7 +21,7 @@ namespace Oculus_Test.OculusActions
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate float[] GetTracker();
+        private delegate IntPtr GetTracker();
 
         private static IntPtr RetrieveDllGetTrackerFunction()
         {
@@ -35,7 +35,10 @@ namespace Oculus_Test.OculusActions
         {
           var tracker = RetrieveDllGetTrackerFunction();
           var retrieveTracking = (GetTracker)Marshal.GetDelegateForFunctionPointer(tracker, typeof(GetTracker));
-          _tracking = retrieveTracking();
+          var resultPtr = retrieveTracking();
+          var result = new float[6];
+          Marshal.Copy(resultPtr, result, 0, 6);
+          _tracking = result;
         }
     }
 }

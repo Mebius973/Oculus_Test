@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OculusDll.cs" />
     <Compile Include="Utils\MalcolmPerformer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -112,14 +114,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Oculus %28DX11%29.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Oculus.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\pirate-ship-left-eye.jpg" />
-    <Resource Include="assets\pirate-ship-right-eye.jpg" />
+    <None Include="Oculus %28DX11%29.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\pirate-ship-left-eye.bmp" />
+    <Resource Include="assets\pirate-ship-right-eye.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

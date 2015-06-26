@@ -1,6 +1,5 @@
 ﻿using System;
 using Oculus_Test.Properties;
-using Oculus_Test.Utils;
 
 namespace Oculus_Test
 {
@@ -10,24 +9,8 @@ namespace Oculus_Test
 
     public OculusAction(string dllVersion)
     {
-      var test = Dll.FreeLibrary(HGetProcIddll);
-      switch (dllVersion)
-      {
-        case "New":
-          HGetProcIddll = Dll.LoadLibrary(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\Oculus (DX11).dll");
-          Console.WriteLine(@"HGetProcIddll vaut: " + HGetProcIddll);
-          break;
-        case "Old":
-          HGetProcIddll = Dll.LoadLibrary(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\Oculus.dll");
-          Console.WriteLine(@"HGetProcIddll vaut: " + HGetProcIddll);
-          break;
-        case "None":
-          // By default, when no version is specified, we will use the old one
-          HGetProcIddll = Dll.LoadLibrary(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\Oculus.dll");
-          Console.WriteLine(@"HGetProcIddll vaut: " + HGetProcIddll);
-          break;
-      }
-
+      HGetProcIddll = OculusDll.Load(dllVersion);
+      Console.WriteLine(@"HGetProcIddll vaut: " + HGetProcIddll);
       if (HGetProcIddll == IntPtr.Zero)
       {
         Console.WriteLine(Resources.OculusAction_OculusAction_Error_could_not_load_the_dynamic_library);

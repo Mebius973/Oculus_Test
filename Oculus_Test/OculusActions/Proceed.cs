@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using Oculus_Test.Properties;
 using Oculus_Test.Utils;
 
@@ -11,6 +10,7 @@ namespace Oculus_Test.OculusActions
   public class Proceed : OculusAction
   {
     private string _status;
+    private bool _isProceed;
 
     public Proceed(string dllVersion)
       : base(dllVersion)
@@ -24,8 +24,14 @@ namespace Oculus_Test.OculusActions
       return _status;
     }
 
+    public bool IsProceed()
+    {
+      return _isProceed;
+    }
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate int Process(char[] data);
+    private delegate void Process(
+    [MarshalAs(UnmanagedType.LPStr)]StringBuilder data);
 
     private IntPtr RetrieveDllProcessFunction()
     {
@@ -38,15 +44,24 @@ namespace Oculus_Test.OculusActions
 
     private void ProcessOculus()
     {
-      var bmp = Bitmap.FromFile(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-left-eye.bmp");
+      var bmp = Image.FromFile(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-left-eye.bmp");
       var converter = new ImageConverter();
       var dataBytes = (byte[]) converter.ConvertTo(bmp, typeof (byte[]));
-      var data = System.Text.Encoding.UTF8.GetString(dataBytes).ToCharArray();
+      if (dataBytes == null)
+      {
+        _status = "Couldn't open image files";
+        return;
+      }
+      var data = new StringBuilder();
+      foreach (var databyte in dataBytes)
+      {
+        data.Append(databyte);
+      }
       var process = RetrieveDllProcessFunction();
       var processOculus = (Process)Marshal.GetDelegateForFunctionPointer(process, typeof(Process));
-
       processOculus(data);
       _status = "Oculus has been proceed";
+      _isProceed = true;
     }
   }
 }

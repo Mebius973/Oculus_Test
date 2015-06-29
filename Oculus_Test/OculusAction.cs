@@ -5,7 +5,7 @@ namespace Oculus_Test
 {
   public class OculusAction
   {
-    public static IntPtr HGetProcIddll;
+    protected static IntPtr HGetProcIddll;
 
     public OculusAction(string dllVersion)
     {
@@ -17,7 +17,7 @@ namespace Oculus_Test
       }
     }
 
-    public bool IsDllLoad()
+    public static bool IsDllLoad()
     {
       return (HGetProcIddll != IntPtr.Zero);
     }
@@ -25,11 +25,6 @@ namespace Oculus_Test
     public string Show()
     {
       throw new NotImplementedException();
-    }
-
-    protected OculusAction()
-    {
-      throw new ArgumentException();
     }
   }
 }

@@ -11,14 +11,14 @@ namespace Oculus_Test.Malcolms
     public MalcolmProceed(string dllVersion, TextBlock field)
       : base(dllVersion, field)
     {
+      OculusDll.InitializeOculus(dllVersion);
       _proceed = new Proceed(dllVersion);
     }
 
     public new void Update()
     {
-      // This technique of display will be a problem when we ask the size several time in a row
-      Textblock.Inlines.Add(new Run("\n       "));
-      Textblock.Inlines.Add(new Run(_proceed.Show()));
+      if (Textblock.Inlines.Count > 1) Textblock.Inlines.Remove(Textblock.Inlines.LastInline);
+      Textblock.Inlines.InsertAfter(Textblock.Inlines.FirstInline, new Run("\n" + _proceed.Show()));
     }
   }
 }

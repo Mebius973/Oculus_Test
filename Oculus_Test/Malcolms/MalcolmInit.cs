@@ -16,8 +16,8 @@ namespace Oculus_Test.Malcolms
 
     public new void Update()
     {
-      Textblock.Inlines.Add(new Run("\n       "));
-      Textblock.Inlines.Add(new Run(_init.Show()));
+      if (Textblock.Inlines.Count > 1 ) Textblock.Inlines.Remove(Textblock.Inlines.LastInline);
+      Textblock.Inlines.InsertAfter(Textblock.Inlines.FirstInline, new Run("\n" + _init.Show()));
     }
   }
 }

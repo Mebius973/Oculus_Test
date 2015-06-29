@@ -11,13 +11,15 @@ namespace Oculus_Test.Malcolms
     public MalcolmEyeWidth(string dllVersion, TextBlock field)
       : base(dllVersion, field)
     {
+      OculusDll.InitializeOculus(dllVersion);
+      OculusDll.ProcessOculus(dllVersion);
       _eyeWidth = new EyeWidth(dllVersion);
     }
 
     public new void Update()
     {
-      Textblock.Inlines.Add(new Run("\n       "));
-      Textblock.Inlines.Add(new Run(_eyeWidth.Show()));
+      if (Textblock.Inlines.Count > 1) Textblock.Inlines.Remove(Textblock.Inlines.LastInline);
+      Textblock.Inlines.InsertAfter(Textblock.Inlines.FirstInline, new Run("\n" + _eyeWidth.Show()));
     }
   }
 }

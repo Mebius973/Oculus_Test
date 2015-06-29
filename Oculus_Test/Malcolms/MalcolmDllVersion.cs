@@ -14,7 +14,7 @@ namespace Oculus_Test.Malcolms
 
     public new void Update()
     {
-      if (_oculusAction.IsDllLoad())
+      if (OculusAction.IsDllLoad())
       {
         Textblock.Text = DllVersion;
       }

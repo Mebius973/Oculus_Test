@@ -8,6 +8,7 @@ namespace Oculus_Test.OculusActions
   public class Init : OculusAction
   {
     private string _status;
+    private bool _initSuccess;
 
     public Init(string dllVersion)
       : base(dllVersion)
@@ -21,8 +22,13 @@ namespace Oculus_Test.OculusActions
       return _status;
     }
 
+    public bool IsInitialized()
+    {
+      return _initSuccess;
+    }
+
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate int Initialize();
+    private delegate bool Initialize();
 
     private IntPtr RetrieveDllInitFunction()
     {
@@ -37,8 +43,8 @@ namespace Oculus_Test.OculusActions
     {
       var init = RetrieveDllInitFunction();
       var initializeOculus = (Initialize)Marshal.GetDelegateForFunctionPointer(init, typeof(Initialize));
-      initializeOculus();
-      _status = "Oculus might be ready";
+      _initSuccess = initializeOculus();
+      _status = _initSuccess ? "Oculus is ready" : "Failed to initialize Oculus" ;
     }
   }
 }

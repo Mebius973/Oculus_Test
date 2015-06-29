@@ -100,7 +100,7 @@
       </Button>
       <Button Name="Tracking" Grid.Column="2" Margin="10,0,10,0" Click="Tracking_OnClick" Grid.Row="1">
         <TextBlock>
-                    Get Oculus' <Underline>t</Underline>racking information
+                    Get Oculus' <Bold><Underline>t</Underline>racking</Bold> information
         </TextBlock>
       </Button>
       <StackPanel Height="60" Width="100" Background="FloralWhite" Grid.Column="0" Grid.Row="2">
@@ -126,17 +126,17 @@
       </StackPanel>
       <Button Name="Init" Grid.Column="0" Margin="10,0,10,0" Click="Init_OnClick"  Grid.Row="3">
         <TextBlock>
-                    <Underline>I</Underline>nit the Oculus
+                    <Bold><Underline>I</Underline>nit</Bold> the Oculus
         </TextBlock>
       </Button>
       <Button Name="Proceed" Grid.Column="1" Margin="10,0,10,0" Click="Proceed_OnClick" Grid.Row="3">
         <TextBlock>
-                    <Underline>P</Underline>roceed to the Oculus rendering
+                    <Bold><Underline>P</Underline>roceed</Bold> to the Oculus rendering
         </TextBlock>
       </Button>
       <Button Name="Release" Grid.Column="2" Margin="10,0,10,0" Click="Release_OnClick" Grid.Row="3">
         <TextBlock>
-                    <Underline>R</Underline>elease the Oculus
+                    <Bold><Underline>R</Underline>elease</Bold> the Oculus
         </TextBlock>
       </Button>
     </Grid>

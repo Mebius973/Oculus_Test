@@ -22,7 +22,7 @@ namespace Oculus_Test.OculusActions
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate int Released();
+    private delegate void Released();
 
     private IntPtr RetrieveDllReleaseFunction()
     {
@@ -39,6 +39,7 @@ namespace Oculus_Test.OculusActions
       var releaseOculus = (Released)Marshal.GetDelegateForFunctionPointer(release, typeof(Released));
       releaseOculus();
       _status = "Oculus might be released";
+      OculusDll.ReleaseOculus();
     }
   }
 }

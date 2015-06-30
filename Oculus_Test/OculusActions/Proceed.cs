@@ -42,23 +42,47 @@ namespace Oculus_Test.OculusActions
       throw new NullReferenceException();
     }
 
+    private static Image GetImage(string side)
+    {
+      return Image.FromFile(side == "left" ? @"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-left-eye.bmp" : @"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-right-eye.bmp");
+    }
+
     private void ProcessOculus()
     {
-      var bmp = Image.FromFile(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-left-eye.bmp");
       var converter = new ImageConverter();
+
+      // Left eye image
+      var bmp = GetImage("left");
       var dataBytes = (byte[]) converter.ConvertTo(bmp, typeof (byte[]));
       if (dataBytes == null)
       {
         _status = "Couldn't open image files";
         return;
       }
+      MainWindow.SetLeftEyeImage(dataBytes);
       var data = new StringBuilder();
+      var process = RetrieveDllProcessFunction();
+      var processOculus = (Process)Marshal.GetDelegateForFunctionPointer(process, typeof(Process));
+      foreach (var databyte in dataBytes)
+      {
+        data.Append(databyte); 
+      }
+      
+      // Right eye image
+      bmp = GetImage("right");
+      dataBytes = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
+      if (dataBytes == null)
+      {
+        _status = "Couldn't open image files";
+        return;
+      }
+      MainWindow.SetRightEyeImage(dataBytes);
+      
+      // Juxtapose left and right eye image
       foreach (var databyte in dataBytes)
       {
         data.Append(databyte);
       }
-      var process = RetrieveDllProcessFunction();
-      var processOculus = (Process)Marshal.GetDelegateForFunctionPointer(process, typeof(Process));
       processOculus(data);
       _status = "Oculus has been proceed";
       _isProceed = true;

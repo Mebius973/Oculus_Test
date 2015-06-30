@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Oculus_Test.Utils;
 
 namespace Oculus_Test
@@ -14,11 +17,47 @@ namespace Oculus_Test
     private string _dllVersion;
     private static TextBlock _field;
     private string _action;
+    private static BitmapImage LeftEyeBitmapImage { get; set; }
+    private static BitmapImage RightEyeBitmapImage { get; set; }
 
     public MainWindow()
     {
       InitializeComponent();
       _dllVersion = "None";
+    }
+
+    public static void SetLeftEyeImage(byte[] rawImg)
+    {
+      var image = new BitmapImage();
+      using (var mem = new MemoryStream(rawImg))
+      {
+        mem.Position = 0;
+        image.BeginInit();
+        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+        image.CacheOption = BitmapCacheOption.OnLoad;
+        image.UriSource = null;
+        image.StreamSource = mem;
+        image.EndInit();
+      }
+      image.Freeze();
+      LeftEyeBitmapImage = image;
+    }
+
+    public static void SetRightEyeImage(byte[] rawImg)
+    {
+      var image = new BitmapImage();
+      using (var mem = new MemoryStream(rawImg))
+      {
+        mem.Position = 0;
+        image.BeginInit();
+        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+        image.CacheOption = BitmapCacheOption.OnLoad;
+        image.UriSource = null;
+        image.StreamSource = mem;
+        image.EndInit();
+      }
+      image.Freeze();
+      RightEyeBitmapImage = image;
     }
 
     private void LoadOldDll_OnClick(object sender, RoutedEventArgs e)
@@ -72,6 +111,8 @@ namespace Oculus_Test
       _field = ShowProceedStatus;
       _action = "Proceed";
       MalcolmPerformer.For(_action, _dllVersion, _field);
+      LeftEyeImage.Source = LeftEyeBitmapImage;
+      RightEyeImage.Source = RightEyeBitmapImage;
     }
 
     private void Release_OnClick(object sender, RoutedEventArgs e)

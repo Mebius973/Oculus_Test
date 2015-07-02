@@ -62,9 +62,9 @@
         <ColumnDefinition Width="200" />
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
-        <RowDefinition Height="70"/>
+        <RowDefinition Height="120"/>
         <RowDefinition Height="35"/>
-        <RowDefinition Height="70"/>
+        <RowDefinition Height="120"/>
         <RowDefinition Height="35"/>
       </Grid.RowDefinitions>
       <StackPanel Height="60" Width="100" Background="FloralWhite" Grid.Column="0" Grid.Row="0">
@@ -81,7 +81,7 @@
                     </TextBlock.Inlines>
         </TextBlock>
       </StackPanel>
-      <StackPanel Height="60" Width="100" Background="FloralWhite" Grid.Column="2" Grid.Row="0">
+      <StackPanel Height="75" Width="100" Background="FloralWhite" Grid.Row="0" Grid.Column="2" Margin="0,5,0,5">
         <TextBlock Name="ShowTracking" TextWrapping="Wrap" Margin="0,5,0,5" HorizontalAlignment="center">
                     <TextBlock.Inlines>
                         Tracking:

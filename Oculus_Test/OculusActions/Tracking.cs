@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using Oculus_Test.Properties;
 using Oculus_Test.Utils;
 
@@ -17,7 +19,20 @@ namespace Oculus_Test.OculusActions
 
         public new string Show()
         {
-          return _tracking.ToString();
+          var result = "";
+          // on tronque _tracking à 10e-3 près parce que sinon l'affichage est moche et qu'on n'a pas besoin d'autant de précision
+          for (var i = 0; i < 3; i++)
+          {
+            _tracking[i] = _tracking[i]*1000;
+            _tracking[i] = (int) _tracking[i];
+            _tracking[i] = _tracking[i]/1000;
+            _tracking[i+3] = _tracking[i+3] * 1000;
+            _tracking[i+3] = (int)_tracking[i+3];
+            _tracking[i+3] = _tracking[i+3] / 1000;
+
+            result = string.Concat(result, _tracking[i] + "   " + _tracking[i+3] + "\n");
+          }
+          return result;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

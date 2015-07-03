@@ -30,8 +30,7 @@ namespace Oculus_Test.OculusActions
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate void Process(
-    [MarshalAs(UnmanagedType.LPStr)]StringBuilder data);
+    private delegate void Process([In, Out]IntPtr data);
 
     private IntPtr RetrieveDllProcessFunction()
     {
@@ -60,14 +59,13 @@ namespace Oculus_Test.OculusActions
         return;
       }
       MainWindow.SetLeftEyeImage(dataBytes);
-      var data = new StringBuilder();
       var process = RetrieveDllProcessFunction();
       var processOculus = (Process)Marshal.GetDelegateForFunctionPointer(process, typeof(Process));
-      foreach (var databyte in dataBytes)
-      {
-        data.Append(databyte); 
-      }
-      
+      var dataChar = Encoding.Unicode.GetChars(dataBytes);
+      var size = Marshal.SystemDefaultCharSize * dataChar.Length;
+      var data = Marshal.AllocHGlobal(size);
+      Marshal.Copy(dataChar,0,data, dataChar.Length-1);
+      /*
       // Right eye image
       bmp = GetImage("right");
       dataBytes = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
@@ -82,7 +80,7 @@ namespace Oculus_Test.OculusActions
       foreach (var databyte in dataBytes)
       {
         data.Append(databyte);
-      }
+      }*/
       processOculus(data);
       _status = "Oculus has been proceed";
       _isProceed = true;

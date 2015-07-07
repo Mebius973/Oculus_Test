@@ -30,7 +30,7 @@ namespace Oculus_Test.OculusActions
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private delegate void Process([In, Out]IntPtr data);
+    private unsafe delegate void Process(byte* data);
 
     private IntPtr RetrieveDllProcessFunction()
     {
@@ -46,13 +46,13 @@ namespace Oculus_Test.OculusActions
       return Image.FromFile(side == "left" ? @"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-left-eye.bmp" : @"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\assets\pirate-ship-right-eye.bmp");
     }
 
-    private void ProcessOculus()
+    private unsafe void ProcessOculus()
     {
       var converter = new ImageConverter();
 
       // Left eye image
       var bmp = GetImage("left");
-      var dataBytes = (byte[]) converter.ConvertTo(bmp, typeof (byte[]));
+      var dataBytes = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
       if (dataBytes == null)
       {
         _status = "Couldn't open image files";
@@ -61,12 +61,24 @@ namespace Oculus_Test.OculusActions
       MainWindow.SetLeftEyeImage(dataBytes);
       var process = RetrieveDllProcessFunction();
       var processOculus = (Process)Marshal.GetDelegateForFunctionPointer(process, typeof(Process));
-      var dataChar = Encoding.Unicode.GetChars(dataBytes);
-      var size = Marshal.SystemDefaultCharSize * dataChar.Length;
-      var data = Marshal.AllocHGlobal(size);
-      Marshal.Copy(dataChar,0,data, dataChar.Length-1);
-      /*
-      // Right eye image
+      var renderWidth = 2360;
+      var renderHeight = 1460;
+      var RGBAMODE = 4;
+
+      var size = renderHeight * renderWidth * RGBAMODE;
+      byte[] normedDataBytes = new byte[size];
+      for (var i = 0; i < size/2; i++)
+      {
+        if (i < dataBytes.Length)
+        {
+          normedDataBytes[i] = dataBytes[i];
+        }
+        else
+        {
+          normedDataBytes[i] = 0;
+        }
+      }
+
       bmp = GetImage("right");
       dataBytes = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
       if (dataBytes == null)
@@ -75,13 +87,23 @@ namespace Oculus_Test.OculusActions
         return;
       }
       MainWindow.SetRightEyeImage(dataBytes);
-      
-      // Juxtapose left and right eye image
-      foreach (var databyte in dataBytes)
+
+      for (var i = size/2; i < size / 2; i++)
       {
-        data.Append(databyte);
-      }*/
-      processOculus(data);
+        if ((i - size/2) < dataBytes.Length)
+        {
+          normedDataBytes[i] = dataBytes[i];
+        }
+        else
+        {
+          normedDataBytes[i] = 0;
+        }
+      }
+      fixed (byte* bytes = normedDataBytes)
+      {
+        processOculus(bytes);
+      }
+   
       _status = "Oculus has been proceed";
       _isProceed = true;
     }

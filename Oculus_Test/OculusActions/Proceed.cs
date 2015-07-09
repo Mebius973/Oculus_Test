@@ -86,17 +86,11 @@ namespace Oculus_Test.OculusActions
       var sizeRGB = renderHeight * rgbRenderWidth;
       var sizeRGBA = renderHeight * rgbaRenderWidth;
 
-      Console.Write("sizeRGBA / sizeRGB == (4 / 3): ");
-      Console.WriteLine(sizeRGBA / sizeRGB == (4 / 3));
-
       // rgb and rgba byte[] used to load the image from the bmp and then preparing it to be transfered to the Oculus.
       byte[] rgbDataBytes = new byte[sizeRGB] ;
       for (int i = 0; i < rgbDataBytes.Length; i++) { rgbDataBytes[i] = 0; }
       byte[] rgbaDataBytes = new byte[sizeRGBA];
       for (int i = 0; i < rgbaDataBytes.Length; i++) { rgbaDataBytes[i] = 0; }
-
-        Console.Write("rgbaDataBytes.Length / rgbDataBytes.Length == (4 / 3): ");
-      Console.WriteLine(rgbaDataBytes.Length / rgbDataBytes.Length == (4 / 3));
 
       // Retrieving the Process function from the dll
       var process = RetrieveDllProcessFunction();
@@ -121,34 +115,23 @@ namespace Oculus_Test.OculusActions
         {
           if (x < sourceRgbRenderWidth / 2)
           {
-            rgbDataBytes[x + (y * rgbRenderWidth)] = leftDataBytes[x + (y * sourceRgbRenderWidth / 2)];
+            rgbDataBytes[x + ((renderHeight - 1 - y) * rgbRenderWidth)] = leftDataBytes[x + (y * sourceRgbRenderWidth / 2)];
           }
           else if ((rgbRenderWidth - x) < sourceRgbRenderWidth / 2)
           {
-           // Console.WriteLine((rgbRenderWidth - (sourceRgbRenderWidth / 2)) - x + (y * sourceRgbRenderWidth / 2));
-           // Console.WriteLine(rightDataBytes.Length);
-            //Console.WriteLine(rightDataBytes.Length - (rgbRenderWidth - (sourceRgbRenderWidth / 2)) - x + (y * sourceRgbRenderWidth / 2));
-            rgbDataBytes[x + (y * rgbRenderWidth)] = rightDataBytes[x - (rgbRenderWidth - (sourceRgbRenderWidth / 2)) + (y * sourceRgbRenderWidth / 2)];
+            rgbDataBytes[x + ((renderHeight - 1 - y) * rgbRenderWidth)] = rightDataBytes[x - (rgbRenderWidth - (sourceRgbRenderWidth / 2)) + (y * sourceRgbRenderWidth / 2)];
           }
           else 
           {
-            rgbDataBytes[x + (y * rgbRenderWidth)] = 0;
+            rgbDataBytes[x + ((renderHeight - 1 - y) * rgbRenderWidth)] = 0;
           }
           maxIteration++;
         }
       }
 
-      //for (var i = 0; i < 54; i++)
-
-        Console.Write("maxIteration: ");
-      Console.WriteLine(maxIteration);
-      Console.Write("rgbDataBytes.Length == maxIteration: ");
-      Console.WriteLine(rgbDataBytes.Length == maxIteration);
-      Console.Write("rgbDataBytes.Length - maxIteration: ");
-      Console.WriteLine(rgbDataBytes.Length - maxIteration);
-
       ConvertRgbToRgba(rgbDataBytes, rgbaDataBytes);
-      MainWindow.SetEyeImage(rgbDataBytes);
+      MainWindow.SetLeftEyeImage(leftDataBytes);
+      MainWindow.SetRightEyeImage(rightDataBytes);
       fixed (byte* bytes = rgbaDataBytes)
       {
         processOculus(bytes);

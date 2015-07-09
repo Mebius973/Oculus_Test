@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="OculusDll.cs" />
+    <Compile Include="Utils\Bytes.cs" />
     <Compile Include="Utils\MalcolmPerformer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

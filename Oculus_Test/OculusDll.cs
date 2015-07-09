@@ -8,7 +8,7 @@ namespace Oculus_Test
   {
     private static IntPtr _dllPtr;
     private static string _currentVersion;
-    private static bool _isInitialzed;
+    private static bool _isInitialized;
     private static bool _isProceed;
 
     public static IntPtr Load(string dllVersion)
@@ -25,9 +25,9 @@ namespace Oculus_Test
 
     public static void InitializeOculus(string dllVersion)
     {
-      if (_currentVersion == dllVersion && _isInitialzed) return;
+      if (_currentVersion == dllVersion && _isInitialized) return;
       var init = new Init(dllVersion);
-      _isInitialzed = init.IsInitialized();
+      _isInitialized = init.IsInitialized();
     }
 
     public static void ProcessOculus(string dllVersion)
@@ -39,7 +39,7 @@ namespace Oculus_Test
 
     public static void ReleaseOculus()
     {
-      _isInitialzed = false;
+      _isInitialized = false;
     }
 
     private static IntPtr SelectVersion(string dllVersion)

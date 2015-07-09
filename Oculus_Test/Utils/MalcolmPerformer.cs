@@ -10,6 +10,7 @@ namespace Oculus_Test.Utils
   {
     public static void For(string action, string dllVersion, TextBlock field)
     {
+      /*
       object[] args = { dllVersion, field };
       var malcolmFullName = "Oculus_Test.Malcolms.Malcolm" + action;
       var malcolmClassName = Type.GetType(malcolmFullName);
@@ -17,6 +18,9 @@ namespace Oculus_Test.Utils
       var malcolm = (Malcolm)Activator.CreateInstance(malcolmClassName, args);
       var update = malcolmClassName.GetMethod("Update");
       update.Invoke(malcolm, null);
+       */
+
+      new MalcolmProceed(dllVersion,field);
     }
   }
 }

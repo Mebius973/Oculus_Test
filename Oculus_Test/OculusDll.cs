@@ -47,12 +47,12 @@ namespace Oculus_Test
       switch (dllVersion)
       {
         case "New":
-          return Dll.LoadLibrary(@"C:\Users\Casque2\OneDrive\Stage IFSTTAR\Oculus_Test\Oculus_Test\Oculus (DX11).dll");
+          return Dll.LoadLibrary(@"C:\Oculus\NewOculusDll\Samples\OculusRoomTiny\OculusRoomTiny (DX11)\Bin\Windows\Win32\Debug\VS2010\Oculus (DX11).dll");
         case "Old":
           return Dll.LoadLibrary(@"C:\SiVIC2010\OculusRiftSDK\Samples\OculusRoomTiny\Bin\Win\VS2010\Debug\Win32\OculusRoomTiny.dll");
         case "None":
           // By default, when no version is specified, we will use the old one
-          return Dll.LoadLibrary(@"C:\SiVIC2010\OculusRiftSDK\Samples\OculusRoomTiny\Bin\Win\VS2010\Debug\Win32\OculusRoomTiny.dll");
+          return Dll.LoadLibrary(@"C:\Oculus\NewOculusDll\Samples\OculusRoomTiny\OculusRoomTiny (DX11)\Bin\Windows\Win32\Debug\VS2010\Oculus (DX11).dll");
       }
       return IntPtr.Zero;
     }

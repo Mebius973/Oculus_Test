@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 
 namespace Oculus_Test.Utils
 {
   static class Bytes
   {
-    public static int RGBMODE = 3;
-    public static int RGBAMODE = 4;
-    private static int renderWidth = 2360;
-    private static int renderHeight = 1460;
-    private static int rgbRenderWidth = RGBMODE * renderWidth;
-    private static int rgbaRenderWidth = RGBAMODE * renderWidth;
-    public static int sizeRGB = renderHeight * rgbRenderWidth;
-    private static int sizeRGBA = renderHeight * rgbaRenderWidth;
+    private const int Rgbmode = 3;
+    private const int Rgbamode = 4;
+    private const int RenderWidth = 2360;
+    private const int RenderHeight = 1460;
+    private const int RgbRenderWidth = Rgbmode*RenderWidth;
+    private const int RgbaRenderWidth = Rgbamode*RenderWidth;
+    private const int SizeRgb = RenderHeight*RgbRenderWidth;
+    private const int SizeRgba = RenderHeight*RgbaRenderWidth;
 
     public static byte[] BmpToBytes(Image source)
     {
@@ -27,7 +24,7 @@ namespace Oculus_Test.Utils
 
     public static byte[] ConvertRgbToRgba(byte[] sourceRgb)
     {
-      var targetRgba  = new byte[sizeRGBA];
+      var targetRgba  = new byte[SizeRgba];
       for (int i = 0; i < targetRgba.Length; i++) { targetRgba[i] = 0; }
       if (targetRgba.Length / sourceRgb.Length != 4 / 3)
       {
@@ -48,23 +45,23 @@ namespace Oculus_Test.Utils
 
     public static byte[] EyeImagesToOculusRgb(byte[] leftDataBytes, byte[] rightDataBytes)
     {
-      var rgbDataBytes = new byte[sizeRGB] ;
+      var rgbDataBytes = new byte[SizeRgb] ;
       for (int i = 0; i < rgbDataBytes.Length; i++) { rgbDataBytes[i] = 0; }
-      for (var y = 0; y < renderHeight; y++)
+      for (var y = 0; y < RenderHeight; y++)
       {
-        for (var x = 0; x < rgbRenderWidth; x++)
+        for (var x = 0; x < RgbRenderWidth; x++)
         {
-          if (x < rgbRenderWidth / 2)
+          if (x < RgbRenderWidth / 2)
           {
-            rgbDataBytes[x + ((renderHeight - 1 - y) * rgbRenderWidth)] = leftDataBytes[x + (y * rgbRenderWidth / 2)];
+            rgbDataBytes[x + ((RenderHeight - 1 - y) * RgbRenderWidth)] = leftDataBytes[x + (y * RgbRenderWidth / 2)];
           }
-          else if ((rgbRenderWidth - x) < rgbRenderWidth / 2)
+          else if ((RgbRenderWidth - x) < RgbRenderWidth / 2)
           {
-            rgbDataBytes[x + ((renderHeight - 1 - y) * rgbRenderWidth)] = rightDataBytes[x - (rgbRenderWidth - (rgbRenderWidth / 2)) + (y * rgbRenderWidth / 2)];
+            rgbDataBytes[x + ((RenderHeight - 1 - y) * RgbRenderWidth)] = rightDataBytes[x - (RgbRenderWidth - (RgbRenderWidth / 2)) + (y * RgbRenderWidth / 2)];
           }
           else
           {
-            rgbDataBytes[x + ((renderHeight - 1 - y) * rgbRenderWidth)] = 0;
+            rgbDataBytes[x + ((RenderHeight - 1 - y) * RgbRenderWidth)] = 0;
           }
         }
       }

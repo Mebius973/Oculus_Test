@@ -29,7 +29,7 @@ namespace Oculus_Test.OculusActions
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    private unsafe delegate void Process(byte* data);
+    private unsafe delegate void Process(byte* leftData, byte* rightData);
 
     private IntPtr RetrieveDllProcessFunction()
     {
@@ -60,17 +60,22 @@ namespace Oculus_Test.OculusActions
       var rightDataBytes = Bytes.BmpToBytes(bmp); // TODO: try/catch the exception raised by BmpToBytes
 
       // We juxtapose the images
-      byte[] rgbDataBytes = Bytes.EyeImagesToOculusRgb(leftDataBytes, rightDataBytes);
+      //byte[] rgbDataBytes = Bytes.EyeImagesToOculusRgb(leftDataBytes, rightDataBytes);
 
       // Then we convert to RGBA
-      byte[] rgbaDataBytes = Bytes.ConvertRgbToRgba(rgbDataBytes);
+      //byte[] rgbaDataBytes = Bytes.ConvertRgbToRgba(rgbDataBytes);
+      byte[] rgbLeftaDataBytes = Bytes.ConvertRgbToRgba(leftDataBytes);
+      byte[] rgbaRightDataBytes = Bytes.ConvertRgbToRgba(rightDataBytes);
 
       // Finally displays everything
       MainWindow.SetLeftEyeImage(leftDataBytes);
       MainWindow.SetRightEyeImage(rightDataBytes);
-      fixed (byte* bytes = rgbaDataBytes)
+      fixed (byte* leftBytes = rgbLeftaDataBytes)
       {
-        processOculus(bytes);
+        fixed (byte* rightBytes = rgbaRightDataBytes)
+        {
+          processOculus(leftBytes, rightBytes);
+        }
       }
 
       _status = "Oculus has been proceed";

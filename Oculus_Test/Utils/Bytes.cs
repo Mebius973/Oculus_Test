@@ -7,10 +7,11 @@ namespace Oculus_Test.Utils
   {
     private const int Rgbmode = 3;
     private const int Rgbamode = 4;
-    private const int RenderWidth = 2360;
+    private const int RenderWidth = 1180;
     private const int RenderHeight = 1460;
     private const int RgbRenderWidth = Rgbmode*RenderWidth;
     private const int RgbaRenderWidth = Rgbamode*RenderWidth;
+    private const int Size = RenderHeight*RenderWidth;
     private const int SizeRgb = RenderHeight*RgbRenderWidth;
     private const int SizeRgba = RenderHeight*RgbaRenderWidth;
 
@@ -31,7 +32,7 @@ namespace Oculus_Test.Utils
         throw new ArgumentException();
       }
       var target = new byte[4];
-      for (var i = 0; i < sourceRgb.Length / 3; i++)
+      for (var i = 0; i < Size; i++)
       {
         target[2] = sourceRgb[3 * i];
         target[1] = sourceRgb[3 * i + 1];

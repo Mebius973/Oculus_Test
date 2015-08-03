@@ -126,10 +126,6 @@
     <Resource Include="assets\pirate-ship-left-eye.bmp" />
     <Resource Include="assets\pirate-ship-right-eye.bmp" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="assets\pirate-ship-left-eye-dualmode.bmp" />
-    <Resource Include="assets\pirate-ship-right-eye-dualmode.bmp" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

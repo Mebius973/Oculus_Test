@@ -64,13 +64,17 @@ namespace Oculus_Test.OculusActions
 
       // Then we convert to RGBA
       //byte[] rgbaDataBytes = Bytes.ConvertRgbToRgba(rgbDataBytes);
-      byte[] rgbLeftaDataBytes = Bytes.ConvertRgbToRgba(leftDataBytes);
+      byte[] rgbaLeftDataBytes = Bytes.ConvertRgbToRgba(leftDataBytes);
       byte[] rgbaRightDataBytes = Bytes.ConvertRgbToRgba(rightDataBytes);
+
+      // We flip vertically the images because the image is upside down
+      rgbaLeftDataBytes = Bytes.VerticalFlip(rgbaLeftDataBytes);
+      rgbaRightDataBytes = Bytes.VerticalFlip(rgbaRightDataBytes);
 
       // Finally displays everything
       MainWindow.SetLeftEyeImage(leftDataBytes);
       MainWindow.SetRightEyeImage(rightDataBytes);
-      fixed (byte* leftBytes = rgbLeftaDataBytes)
+      fixed (byte* leftBytes = rgbaLeftDataBytes)
       {
         fixed (byte* rightBytes = rgbaRightDataBytes)
         {

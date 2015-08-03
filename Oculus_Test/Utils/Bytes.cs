@@ -44,6 +44,19 @@ namespace Oculus_Test.Utils
       return targetRgba;
     }
 
+    public static byte[] VerticalFlip(byte[] dataBytes)
+    {
+      var flipedBytes = new byte[SizeRgba];
+      for (var y = 0; y < RenderHeight; y++)
+      {
+        for (var x = 0; x < RgbaRenderWidth; x++)
+        {
+          flipedBytes[x + ((RenderHeight - 1 - y) * RgbaRenderWidth)] = dataBytes[x + y * RgbaRenderWidth];
+        }
+      }
+      return flipedBytes;
+    }
+
     public static byte[] EyeImagesToOculusRgb(byte[] leftDataBytes, byte[] rightDataBytes)
     {
       var rgbDataBytes = new byte[SizeRgb] ;
@@ -54,15 +67,15 @@ namespace Oculus_Test.Utils
         {
           if (x < RgbRenderWidth / 2)
           {
-            rgbDataBytes[x + ((RenderHeight - 1 - y) * RgbRenderWidth)] = leftDataBytes[x + (y * RgbRenderWidth / 2)];
+            rgbDataBytes[x + y] = leftDataBytes[x + (y * RgbRenderWidth / 2)];
           }
           else if ((RgbRenderWidth - x) < RgbRenderWidth / 2)
           {
-            rgbDataBytes[x + ((RenderHeight - 1 - y) * RgbRenderWidth)] = rightDataBytes[x - (RgbRenderWidth - (RgbRenderWidth / 2)) + (y * RgbRenderWidth / 2)];
+            rgbDataBytes[x + y] = rightDataBytes[x - (RgbRenderWidth - (RgbRenderWidth / 2)) + (y * RgbRenderWidth / 2)];
           }
           else
           {
-            rgbDataBytes[x + ((RenderHeight - 1 - y) * RgbRenderWidth)] = 0;
+            rgbDataBytes[x + y] = 0;
           }
         }
       }

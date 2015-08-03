@@ -11,6 +11,7 @@ namespace Oculus_Test.OculusActions
     public ProceedDual(string dllVersion)
       : base(dllVersion)
     {
+      Bytes.SetMode("Dual");
       ProcessOculus();
     }
 

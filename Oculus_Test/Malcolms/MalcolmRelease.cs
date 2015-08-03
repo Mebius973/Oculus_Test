@@ -12,7 +12,7 @@ namespace Oculus_Test.Malcolms
       : base(dllVersion, imageMode, field)
     {
       OculusDll.InitializeOculus(dllVersion);
-      OculusDll.ProcessOculus(dllVersion);
+      OculusDll.ProcessOculus(dllVersion, imageMode);
       _release = new Release(dllVersion);
     }
 

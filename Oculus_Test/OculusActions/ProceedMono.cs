@@ -11,6 +11,7 @@ namespace Oculus_Test.OculusActions
     public ProceedMono(string dllVersion)
       : base(dllVersion)
     {
+      Bytes.SetMode("Mono");
       ProcessOculus();
     }
 

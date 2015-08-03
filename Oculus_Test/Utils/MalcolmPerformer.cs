@@ -20,7 +20,7 @@ namespace Oculus_Test.Utils
       update.Invoke(malcolm, null);
 
       // As we do reflection here, please uncomment the following lines to debug properly
-      //var malcolm = new MalcolmProceed(dllVersion, imageMode, field);
+      //var malcolm = new MalcolmTracking(dllVersion, imageMode, field);
       //malcolm.Update();
     }
   }

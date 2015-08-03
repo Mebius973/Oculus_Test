@@ -16,16 +16,13 @@ namespace Oculus_Test.Malcolms
       switch (imageMode)
       {
         case "Mono":
-          Bytes.SetMode("Mono");
           _proceed = new ProceedMono(dllVersion);
           break;
         case "Dual":
-          Bytes.SetMode("Dual");
           _proceed = new ProceedDual(dllVersion);
           break;
         case "None":
           // This is set here in an explicit way because we don't want a switch case somewhere else and it says explicitly what the default image mode is
-          Bytes.SetMode("Dual");
           _proceed = new ProceedDual(dllVersion);
           break;
       }

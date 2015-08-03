@@ -19,7 +19,7 @@ namespace Oculus_Test.Utils
     // No matter what you do, always set the mode first!
     public static void SetMode(string imageMode)
     {
-      _nbImage = (imageMode == "Mono" ? 2 : 1);
+      _nbImage = (imageMode == "Mono" ? 1 : 2);
       UpdateConstants();
     }
 
@@ -92,7 +92,7 @@ namespace Oculus_Test.Utils
     
     private static void UpdateConstants()
     {
-      _renderWidth = 1180 * _nbImage;
+      _renderWidth = 1180 * (3 - _nbImage);
       _renderHeight = 1460;
       _rgbRenderWidth = Rgbmode * _renderWidth;
       _rgbaRenderWidth = Rgbamode * _renderWidth;

@@ -33,16 +33,8 @@ namespace Oculus_Test
     public static void ProcessOculus(string dllVersion, string imageMode)
     {
       if (_currentVersion == dllVersion && _isProceed) return;
-      if (imageMode == "Mono")
-      {
-        var proceed = new ProceedMono(dllVersion);
-        _isProceed = proceed.IsProceed();
-      }
-      else
-      {
-         var proceed = new ProceedDual(dllVersion);
-        _isProceed = proceed.IsProceed();
-      }
+      Proceed proceed = ((imageMode == "Mono") ? (Proceed)new ProceedMono(dllVersion) : new ProceedDual(dllVersion));
+      _isProceed = proceed.IsProceed();
     }
 
     public static void ReleaseOculus()

@@ -8,10 +8,10 @@ namespace Oculus_Test.Utils
 {
   public static class MalcolmPerformer
   {
-    public static void For(string action, string dllVersion, TextBlock field)
+    public static void For(string action, string dllVersion, string imageMode, TextBlock field)
     {
       // In case of errors coming from this part of the code, comment it and call directly your malcolm
-      object[] args = { dllVersion, field };
+      object[] args = { dllVersion, imageMode, field };
       var malcolmFullName = "Oculus_Test.Malcolms.Malcolm" + action;
       var malcolmClassName = Type.GetType(malcolmFullName);
       if (malcolmClassName == null) return;
@@ -19,7 +19,8 @@ namespace Oculus_Test.Utils
       var update = malcolmClassName.GetMethod("Update");
       update.Invoke(malcolm, null);
 
-      //var malcolm = new MalcolmProceed(dllVersion, field);
+      // As we do reflection here, please uncomment the following lines to debug properly
+      //var malcolm = new MalcolmProceed(dllVersion, imageMode, field);
       //malcolm.Update();
     }
   }

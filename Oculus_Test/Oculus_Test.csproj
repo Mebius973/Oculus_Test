@@ -57,6 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OculusActions\Proceed.cs" />
+    <Compile Include="OculusActions\ProceedMono.cs" />
     <Compile Include="OculusDll.cs" />
     <Compile Include="Utils\Bytes.cs" />
     <Compile Include="Utils\MalcolmPerformer.cs" />
@@ -87,7 +89,7 @@
     <Compile Include="OculusActions\EyeHeight.cs" />
     <Compile Include="OculusActions\EyeWidth.cs" />
     <Compile Include="OculusActions\Init.cs" />
-    <Compile Include="OculusActions\Proceed.cs" />
+    <Compile Include="OculusActions\ProceedDual.cs" />
     <Compile Include="OculusActions\Release.cs" />
     <Compile Include="OculusActions\Tracking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Oculus_Test.Utils;
@@ -14,6 +15,7 @@ namespace Oculus_Test
   public partial class MainWindow
   {
     private string _dllVersion;
+    private string _imageMode;
     private static TextBlock _field;
     private string _action;
     private static BitmapImage LeftEyeBitmapImage { get; set; }
@@ -23,6 +25,7 @@ namespace Oculus_Test
     {
       InitializeComponent();
       _dllVersion = "None";
+      _imageMode = "None";
     }
 
     public static void SetLeftEyeImage(byte[] rawImg)
@@ -66,7 +69,7 @@ namespace Oculus_Test
       _dllVersion = "Old";
       _field = LoadedDll;
       _action = "DllVersion";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
     }
 
     private void LoadNewDll_OnClick(object sender, RoutedEventArgs e)
@@ -74,42 +77,54 @@ namespace Oculus_Test
       _dllVersion = "New";
       _field = LoadedDll;
       _action = "DllVersion";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
+    }
+
+    private void MonoMode_OnClick(object sender, RoutedEventArgs e)
+    {
+      _imageMode = "Mono";
+      ImageStreamingMode.Text = _imageMode;
+    }
+
+    private void DualMode_OnClick(object sender, RoutedEventArgs e)
+    {
+      _imageMode = "Dual";
+      ImageStreamingMode.Text = _imageMode;
     }
 
     private void EyeHeight_OnClick(object sender, RoutedEventArgs e)
     {
       _field = ShowEyeHeight;
       _action = "EyeHeight";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
     }
 
     private void EyeWidth_OnClick(object sender, RoutedEventArgs e)
     {
       _field = ShowEyeWidth;
       _action = "EyeWidth";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
     }
 
     private void Tracking_OnClick(object sender, RoutedEventArgs e)
     {
       _field = ShowTracking;
       _action = "Tracking";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
     }
 
     private void Init_OnClick(object sender, RoutedEventArgs e)
     {
       _field = ShowInitStatus;
       _action = "Init";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
     }
 
     private void Proceed_OnClick(object sender, RoutedEventArgs e)
     {
       _field = ShowProceedStatus;
       _action = "Proceed";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
       LeftEyeImage.Source = LeftEyeBitmapImage;
       RightEyeImage.Source = RightEyeBitmapImage;
     }
@@ -118,7 +133,7 @@ namespace Oculus_Test
     {
       _field = ShowReleaseStatus;
       _action = "Release";
-      MalcolmPerformer.For(_action, _dllVersion, _field);
+      MalcolmPerformer.For(_action, _dllVersion, _imageMode, _field);
     }
 
     private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
@@ -154,6 +169,12 @@ namespace Oculus_Test
           break;
         case Key.R:
           Release_OnClick(null, null);
+          break;
+        case Key.M:
+          MonoMode_OnClick(null, null);
+          break;
+        case Key.D:
+          DualMode_OnClick(null, null);
           break;
       }
     }

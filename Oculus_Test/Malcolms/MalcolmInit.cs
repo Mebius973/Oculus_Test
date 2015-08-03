@@ -8,8 +8,8 @@ namespace Oculus_Test.Malcolms
   {
     private readonly Init _init;
 
-    public MalcolmInit(string dllVersion, TextBlock field)
-      : base(dllVersion, field)
+    public MalcolmInit(string dllVersion, string imageMode, TextBlock field)
+      : base(dllVersion, imageMode, field)
     {
       _init = new Init(dllVersion);
     }

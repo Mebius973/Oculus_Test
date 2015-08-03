@@ -8,8 +8,8 @@ namespace Oculus_Test.Malcolms
   {
     private readonly EyeWidth _eyeWidth;
 
-    public MalcolmEyeWidth(string dllVersion, TextBlock field)
-      : base(dllVersion, field)
+    public MalcolmEyeWidth(string dllVersion, string imageMode, TextBlock field)
+      : base(dllVersion, imageMode, field)
     {
       OculusDll.InitializeOculus(dllVersion);
       OculusDll.ProcessOculus(dllVersion);

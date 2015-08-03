@@ -8,8 +8,8 @@ namespace Oculus_Test.Malcolms
   {
     private readonly Release _release;
 
-    public MalcolmRelease(string dllVersion, TextBlock field)
-      : base(dllVersion, field)
+    public MalcolmRelease(string dllVersion, string imageMode, TextBlock field)
+      : base(dllVersion, imageMode, field)
     {
       OculusDll.InitializeOculus(dllVersion);
       OculusDll.ProcessOculus(dllVersion);

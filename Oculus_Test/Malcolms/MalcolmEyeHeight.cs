@@ -8,8 +8,8 @@ namespace Oculus_Test.Malcolms
   {
     private readonly EyeHeight _eyeHeight;
 
-    public MalcolmEyeHeight(string dllVersion, TextBlock field)
-      : base(dllVersion, field)
+    public MalcolmEyeHeight(string dllVersion, string imageMode, TextBlock field)
+      : base(dllVersion, imageMode, field)
     {
       OculusDll.InitializeOculus(dllVersion);
       OculusDll.ProcessOculus(dllVersion);

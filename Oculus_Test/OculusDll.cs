@@ -33,7 +33,7 @@ namespace Oculus_Test
     public static void ProcessOculus(string dllVersion)
     {
       if (_currentVersion == dllVersion && _isProceed) return;
-      var proceed = new Proceed(dllVersion);
+      var proceed = new ProceedDual(dllVersion);
       _isProceed = proceed.IsProceed();
     }
 
@@ -51,7 +51,7 @@ namespace Oculus_Test
         case "Old":
           return Dll.LoadLibrary(@"C:\SiVIC2010\OculusRiftSDK\Samples\OculusRoomTiny\Bin\Win\VS2010\Debug\Win32\OculusRoomTiny.dll");
         case "None":
-          // By default, when no version is specified, we will use the old one
+          // By default, when no version is specified, we will use the new one
           return Dll.LoadLibrary(@"C:\Oculus\NewOculusDll\Samples\OculusRoomTiny\OculusRoomTiny (DX11)\Bin\Windows\Win32\Debug\VS2010\Oculus (DX11).dll");
       }
       return IntPtr.Zero;

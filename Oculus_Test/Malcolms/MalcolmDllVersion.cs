@@ -6,8 +6,8 @@ namespace Oculus_Test.Malcolms
   {
     private readonly OculusAction _oculusAction;
 
-    public MalcolmDllVersion(string dllVersion, TextBlock field)
-      : base(dllVersion, field)
+    public MalcolmDllVersion(string dllVersion, string imageMode, TextBlock field)
+      : base(dllVersion, imageMode, field)
     {
       _oculusAction = new OculusAction(DllVersion);
     }

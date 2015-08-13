@@ -110,6 +110,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="ClassDiagram3.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,6 +126,10 @@
   <ItemGroup>
     <Resource Include="assets\pirate-ship-left-eye.bmp" />
     <Resource Include="assets\pirate-ship-right-eye.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\pirate-ship-left-eye-autogen-guillaume.bmp" />
+    <Resource Include="assets\pirate-ship-right-eye-autogen-guillaume.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
